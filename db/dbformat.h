@@ -66,16 +66,12 @@ static const SequenceNumber kMaxSequenceNumber =
 
 struct ParsedInternalKey {
   Slice user_key;
-  Slice expire_time;
   SequenceNumber sequence;
   ValueType type;
 
   ParsedInternalKey() { }  // Intentionally left uninitialized (for speed)
-  // this is the construct when time is NULL
   ParsedInternalKey(const Slice& u, const SequenceNumber& seq, ValueType t)
-      : user_key(u), expire_time(0), sequence(seq), type(t) { }
-  ParsedInternalKey(const Slice& u, const Slice& it, const SequenceNumber& seq, ValueType t)
-      : user_key(u), expire_time(it), sequence(seq), type(t) { }
+      : user_key(u), sequence(seq), type(t) { }
   std::string DebugString() const;
 };
 
@@ -147,11 +143,6 @@ class InternalKey {
   std::string rep_;
  public:
   InternalKey() { }   // Leave rep_ as empty to indicate it is invalid
-  InternalKey(const Slice& user_key, char *expire_time, SequenceNumber s, ValueType t) {
-    AppendInternalKey(&rep_, ParsedInternalKey(user_key, std::string(expire_time), s, t));
-  }
-
-  // the origin construct function
   InternalKey(const Slice& user_key, SequenceNumber s, ValueType t) {
     AppendInternalKey(&rep_, ParsedInternalKey(user_key, s, t));
   }

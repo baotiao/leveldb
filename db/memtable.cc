@@ -8,8 +8,6 @@
 #include "leveldb/env.h"
 #include "leveldb/iterator.h"
 #include "util/coding.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 namespace leveldb {
 
@@ -55,7 +53,7 @@ class MemTableIterator: public Iterator {
   explicit MemTableIterator(MemTable::Table* table) : iter_(table) { }
 
   virtual bool Valid() const { return iter_.Valid(); }
-  virtual void Seek(const Slice& k) { printf(" Come in to the See function\n"); iter_.Seek(EncodeKey(&tmp_, k)); }
+  virtual void Seek(const Slice& k) { iter_.Seek(EncodeKey(&tmp_, k)); }
   virtual void SeekToFirst() { iter_.SeekToFirst(); }
   virtual void SeekToLast() { iter_.SeekToLast(); }
   virtual void Next() { iter_.Next(); }
@@ -110,9 +108,7 @@ void MemTable::Add(SequenceNumber s, ValueType type,
 bool MemTable::Get(const LookupKey& key, std::string* value, Status* s) {
   Slice memkey = key.memtable_key();
   Table::Iterator iter(&table_);
-  printf("before The Seek function, memkey.data is %s data\n", memkey.data());
   iter.Seek(memkey.data());
-  printf("iter.Valid() %d\n", iter.Valid());
   if (iter.Valid()) {
     // entry format is:
     //    klength  varint32
@@ -124,26 +120,13 @@ bool MemTable::Get(const LookupKey& key, std::string* value, Status* s) {
     // sequence number since the Seek() call above should have skipped
     // all entries with overly large sequence numbers.
     const char* entry = iter.key();
-    printf("entry is %s\n", entry);
     uint32_t key_length;
     const char* key_ptr = GetVarint32Ptr(entry, entry+5, &key_length);
-    const char* addtime_ptr = key_ptr + key_length - 18;
-    char buf[20];
-    strncpy(buf, addtime_ptr, 10);
-    int exptime = atoi(buf);
-    printf("exptime is %d\n", exptime);
-    time_t now = time(0);
-    if (exptime < (int)(now)) {
-        return false;
-    }
-    printf("key.user_key %s\n", key.user_key().data());
-    int result = comparator_.comparator.user_comparator()->Compare( Slice(key_ptr, key_length - 18), key.user_key());
-    printf("result is %d \n ", result);
-    if (result == 0) {
+    if (comparator_.comparator.user_comparator()->Compare(
+            Slice(key_ptr, key_length - 8),
+            key.user_key()) == 0) {
       // Correct user key
       const uint64_t tag = DecodeFixed64(key_ptr + key_length - 8);
-      printf("key_ptr %s\n", key_ptr);
-      printf("tag is %d\n", tag);
       switch (static_cast<ValueType>(tag & 0xff)) {
         case kTypeValue: {
           Slice v = GetLengthPrefixedSlice(key_ptr + key_length);

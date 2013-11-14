@@ -257,9 +257,8 @@ void DBIter::Seek(const Slice& target) {
   direction_ = kForward;
   ClearSavedValue();
   saved_key_.clear();
-  time_t now = time(0);
   AppendInternalKey(
-      &saved_key_, ParsedInternalKey(target, ctime(&now), sequence_, kValueTypeForSeek));
+      &saved_key_, ParsedInternalKey(target, sequence_, kValueTypeForSeek));
   iter_->Seek(saved_key_);
   if (iter_->Valid()) {
     FindNextUserEntry(false, &saved_key_ /* temporary storage */);

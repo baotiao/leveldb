@@ -16,16 +16,6 @@
 #include "leveldb/slice.h"
 #include "port/port.h"
 
-#define NOW_TIME ctime(time(NULL))
-#ifdef DEBUG
-#define debug(x) cout<<__LINE__<<" "<<#x<<"="<<x<<endl;
-#else
-#define debug(x)
-#endif
-#define here cout<<__LINE__<< "  " << "_______________here" <<endl;
-
-using namespace std;
-
 namespace leveldb {
 
 // Standard Put... routines append to a string

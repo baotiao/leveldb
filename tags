@@ -124,9 +124,7 @@ ByteSize	./db/write_batch_internal.h	/^  static size_t ByteSize(const WriteBatch
 BytewiseComparator	./util/comparator.cc	/^    const Comparator* BytewiseComparator() {$/;"	f	namespace:leveldb
 BytewiseComparatorImpl	./util/comparator.cc	/^                BytewiseComparatorImpl() { }$/;"	f	class:leveldb::__anon32::BytewiseComparatorImpl
 BytewiseComparatorImpl	./util/comparator.cc	/^        class BytewiseComparatorImpl : public Comparator {$/;"	c	namespace:leveldb::__anon32	file:
-CC	./build_config.mk	/^CC=cc$/;"	m
 CRC	./util/crc32c_test.cc	/^class CRC { };$/;"	c	namespace:leveldb::crc32c	file:
-CXX	./build_config.mk	/^CXX=g++$/;"	m
 CXX	./lab/Makefile	/^CXX = g++$/;"	m
 CXXFLAGS	./lab/Makefile	/^CXXFLAGS = -Wall -W -DDEBUG -g -O0$/;"	m
 Cache	./include/leveldb/cache.h	/^  Cache() { }$/;"	f	class:leveldb::Cache
@@ -540,7 +538,7 @@ InternalFilterPolicy	./db/dbformat.h	/^class InternalFilterPolicy : public Filte
 InternalGet	./table/table.cc	/^Status Table::InternalGet(const ReadOptions& options, const Slice& k,$/;"	f	class:leveldb::Table
 InternalKey	./db/dbformat.h	/^  InternalKey() { }   \/\/ Leave rep_ as empty to indicate it is invalid$/;"	f	class:leveldb::InternalKey
 InternalKey	./db/dbformat.h	/^  InternalKey(const Slice& user_key, SequenceNumber s, ValueType t) {$/;"	f	class:leveldb::InternalKey
-InternalKey	./db/dbformat.h	/^  InternalKey(const Slice& user_key, char *input_time, SequenceNumber s, ValueType t) {$/;"	f	class:leveldb::InternalKey
+InternalKey	./db/dbformat.h	/^  InternalKey(const Slice& user_key, char *expire_time, SequenceNumber s, ValueType t) {$/;"	f	class:leveldb::InternalKey
 InternalKey	./db/dbformat.h	/^class InternalKey {$/;"	c	namespace:leveldb
 InternalKeyComparator	./db/dbformat.h	/^  explicit InternalKeyComparator(const Comparator* c) : user_comparator_(c) { }$/;"	f	class:leveldb::InternalKeyComparator
 InternalKeyComparator	./db/dbformat.h	/^class InternalKeyComparator : public Comparator {$/;"	c	namespace:leveldb
@@ -632,7 +630,6 @@ LookupKey	./db/dbformat.cc	/^LookupKey::LookupKey(const Slice& user_key, Sequenc
 LookupKey	./db/dbformat.h	/^class LookupKey {$/;"	c	namespace:leveldb
 MEMENVLIBRARY	./Makefile	/^MEMENVLIBRARY = libmemenv.a$/;"	m
 MEMENVOBJECTS	./Makefile	/^MEMENVOBJECTS = $(MEMENV_SOURCES:.cc=.o)$/;"	m
-MEMENV_SOURCES	./build_config.mk	/^MEMENV_SOURCES=helpers\/memenv\/memenv.cc$/;"	m
 MEMTABLE_TEST	./table/table_test.cc	/^  MEMTABLE_TEST,$/;"	e	enum:leveldb::TestType	file:
 MTState	./db/db_test.cc	/^struct MTState {$/;"	s	namespace:leveldb::__anon9	file:
 MTThread	./db/db_test.cc	/^struct MTThread {$/;"	s	namespace:leveldb::__anon9	file:
@@ -774,7 +771,7 @@ NumberString	./db/log_test.cc	/^static std::string NumberString(int n) {$/;"	f	n
 NumberToString	./util/logging.cc	/^std::string NumberToString(uint64_t num) {$/;"	f	namespace:leveldb
 OBJECT	./lab/Makefile	/^OBJECT = t.o$/;"	m
 OK	./include/leveldb/status.h	/^  static Status OK() { return Status(); }$/;"	f	class:leveldb::Status
-OPT	./Makefile	/^OPT ?= -O2 -DNDEBUG       # (A) Production use (optimized mode)$/;"	m
+OPT	./Makefile	/^ OPT ?= -g2 -O0             # (B) Debug mode, w\/ full line-level debugging symbols$/;"	m
 OldInfoLogFileName	./db/filename.cc	/^std::string OldInfoLogFileName(const std::string& dbname) {$/;"	f	namespace:leveldb
 OnceType	./port/port_example.h	/^typedef intptr_t OnceType;$/;"	t	namespace:leveldb::port
 OnceType	./port/port_posix.h	/^typedef pthread_once_t OnceType;$/;"	t	namespace:leveldb::port
@@ -793,10 +790,7 @@ Order	./doc/bench/db_bench_tree_db.cc	/^  enum Order {$/;"	g	class:leveldb::Benc
 Output	./db/db_impl.cc	/^        struct Output {$/;"	s	struct:leveldb::DBImpl::CompactionState	file:
 OverlapInLevel	./db/version_set.cc	/^bool Version::OverlapInLevel(int level,$/;"	f	class:leveldb::Version
 Overlaps	./db/version_set_test.cc	/^  bool Overlaps(const char* smallest, const char* largest) {$/;"	f	class:leveldb::FindFileTest
-PLATFORM	./build_config.mk	/^PLATFORM=OS_LINUX$/;"	m
 PLATFORMSROOT	./Makefile	/^PLATFORMSROOT=\/Applications\/Xcode.app\/Contents\/Developer\/Platforms$/;"	m
-PLATFORM_CCFLAGS	./build_config.mk	/^PLATFORM_CCFLAGS= -fno-builtin-memcmp -pthread -DOS_LINUX -DLEVELDB_PLATFORM_POSIX -DLEVELDB_CSTDATOMIC_PRESENT -DSNAPPY$/;"	m
-PLATFORM_CXXFLAGS	./build_config.mk	/^PLATFORM_CXXFLAGS=-std=c++0x -fno-builtin-memcmp -pthread -DOS_LINUX -DLEVELDB_PLATFORM_POSIX -DLEVELDB_CSTDATOMIC_PRESENT -DSNAPPY$/;"	m
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	10;"	d
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	14;"	d
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	20;"	d
@@ -806,12 +800,6 @@ PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	33;"	d
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	39;"	d
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	53;"	d
 PLATFORM_IS_LITTLE_ENDIAN	./port/port_posix.h	81;"	d
-PLATFORM_LDFLAGS	./build_config.mk	/^PLATFORM_LDFLAGS=-pthread$/;"	m
-PLATFORM_LIBS	./build_config.mk	/^PLATFORM_LIBS= -lsnappy$/;"	m
-PLATFORM_SHARED_CFLAGS	./build_config.mk	/^PLATFORM_SHARED_CFLAGS=-fPIC$/;"	m
-PLATFORM_SHARED_EXT	./build_config.mk	/^PLATFORM_SHARED_EXT=so$/;"	m
-PLATFORM_SHARED_LDFLAGS	./build_config.mk	/^PLATFORM_SHARED_LDFLAGS=-shared -Wl,-soname -Wl,$/;"	m
-PLATFORM_SHARED_VERSIONED	./build_config.mk	/^PLATFORM_SHARED_VERSIONED=true$/;"	m
 PORT_ATOMIC_POINTER_H_	./port/atomic_pointer.h	20;"	d
 PROGRAMS	./Makefile	/^PROGRAMS = db_bench leveldbutil $(TESTS)$/;"	m
 PackSequenceAndType	./db/dbformat.cc	/^static uint64_t PackSequenceAndType(uint64_t seq, ValueType t) {$/;"	f	namespace:leveldb
@@ -869,7 +857,9 @@ Property	./db/corruption_test.cc	/^  int Property(const std::string& name) {$/;"
 PthreadCall	./port/port_posix.cc	/^static void PthreadCall(const char* label, int result) {$/;"	f	namespace:leveldb::port
 PthreadCall	./util/env_posix.cc	/^  void PthreadCall(const char* label, int result) {$/;"	f	class:leveldb::__anon28::PosixEnv	file:
 Put	./db/db_impl.cc	/^    Status DB::Put(const WriteOptions& opt, const Slice& key, const Slice& value) {$/;"	f	class:leveldb::DB
+Put	./db/db_impl.cc	/^    Status DB::Put(const WriteOptions& opt, const Slice& key, const Slice& value, int addtime) {$/;"	f	class:leveldb::DB
 Put	./db/db_impl.cc	/^    Status DBImpl::Put(const WriteOptions& o, const Slice& key, const Slice& val) {$/;"	f	class:leveldb::DBImpl
+Put	./db/db_impl.cc	/^    Status DBImpl::Put(const WriteOptions& o, const Slice& key, const Slice& val, int et) {$/;"	f	class:leveldb::DBImpl
 Put	./db/db_test.cc	/^  Status Put(const std::string& k, const std::string& v) {$/;"	f	class:leveldb::DBTest
 Put	./db/db_test.cc	/^  virtual Status Put(const WriteOptions& o, const Slice& k, const Slice& v) {$/;"	f	class:leveldb::ModelDB
 Put	./db/leveldb_main.cc	/^  virtual void Put(const Slice& key, const Slice& value) {$/;"	f	class:leveldb::__anon2::WriteBatchItemPrinter
@@ -1008,7 +998,6 @@ SHARED_MAJOR	./Makefile	/^SHARED_MAJOR = 1$/;"	m
 SHARED_MINOR	./Makefile	/^SHARED_MINOR = 9$/;"	m
 SHARED_TRYLOCK_FUNCTION	./port/thread_annotations.h	48;"	d
 SIMULATORROOT	./Makefile	/^SIMULATORROOT=$(PLATFORMSROOT)\/iPhoneSimulator.platform\/Developer$/;"	m
-SOURCES	./build_config.mk	/^SOURCES=db\/builder.cc db\/c.cc db\/dbformat.cc db\/db_impl.cc db\/db_iter.cc db\/filename.cc db\/log_reader.cc db\/log_writer.cc db\/memtable.cc db\/repair.cc db\/table_cache.cc db\/version_edit.cc db\/version_set.cc db\/write_batch.cc table\/block_builder.cc table\/block.cc table\/filter_block.cc table\/format.cc table\/iterator.cc table\/merger.cc table\/table_builder.cc table\/table.cc table\/two_level_iterator.cc util\/arena.cc util\/bloom.cc util\/cache.cc util\/coding.cc util\/comparator.cc util\/crc32c.cc util\/env.cc util\/env_posix.cc util\/filter_policy.cc util\/hash.cc util\/histogram.cc util\/logging.cc util\/options.cc util\/status.cc  port\/port_posix.cc$/;"	m
 STARTING	./db/skiplist_test.cc	/^    STARTING,$/;"	e	enum:leveldb::TestState::ReaderState	file:
 STEP1	./util/crc32c.cc	291;"	d	file:
 STEP1	./util/crc32c.cc	327;"	d	file:
@@ -1712,6 +1701,7 @@ env_	./util/env_test.cc	/^  Env* env_;$/;"	m	class:leveldb::EnvPosixTest	file:
 eof_	./db/log_reader.h	/^  bool eof_;   \/\/ Last Read() indicated EOF by returning < kBlockSize$/;"	m	class:leveldb::log::Reader
 error_if_exists	./include/leveldb/options.h	/^  bool error_if_exists;$/;"	m	struct:leveldb::Options
 events_	./util/env_test.cc	/^  std::string events_;$/;"	m	class:leveldb::EnvPosixTest	file:
+expire_time	./db/dbformat.h	/^  Slice expire_time;$/;"	m	struct:leveldb::ParsedInternalKey
 fake_filter_result	./db/c_test.c	/^static unsigned char fake_filter_result = 1;$/;"	v	file:
 fd_	./util/env_posix.cc	/^  int fd_;$/;"	m	class:leveldb::__anon28::PosixFileLock	file:
 fd_	./util/env_posix.cc	/^  int fd_;$/;"	m	class:leveldb::__anon28::PosixMmapFile	file:
@@ -1804,7 +1794,6 @@ initial_offset_last_record_offsets_	./db/log_test.cc	/^uint64_t LogTest::initial
 initial_offset_record_sizes_	./db/log_test.cc	/^  static size_t initial_offset_record_sizes_[];$/;"	m	class:leveldb::log::LogTest	file:
 initial_offset_record_sizes_	./db/log_test.cc	/^size_t LogTest::initial_offset_record_sizes_[] =$/;"	m	class:leveldb::log::LogTest	file:
 input	./db/version_set.h	/^  FileMetaData* input(int which, int i) const { return inputs_[which][i]; }$/;"	f	class:leveldb::Compaction
-input_time	./db/dbformat.h	/^  Slice input_time;$/;"	m	struct:leveldb::ParsedInternalKey
 input_version_	./db/version_set.h	/^  Version* input_version_;$/;"	m	class:leveldb::Compaction
 inputs_	./db/version_set.h	/^  std::vector<FileMetaData*> inputs_[2];      \/\/ The two sets of inputs$/;"	m	class:leveldb::Compaction
 int16_t	./port/win/stdint.h	/^typedef signed short          int16_t;$/;"	t
